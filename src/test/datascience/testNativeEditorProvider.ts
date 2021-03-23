@@ -5,26 +5,15 @@ import { inject, injectable } from 'inversify';
 import * as uuid from 'uuid/v4';
 import { CustomDocument, Uri, WebviewPanel } from 'vscode';
 
-import {
-    ICommandManager,
-    ICustomEditorService,
-    IDocumentManager,
-    IWorkspaceService
-} from '../../client/common/application/types';
+import { ICustomEditorService, IWorkspaceService } from '../../client/common/application/types';
 import { IFileSystem } from '../../client/common/platform/types';
 import { IAsyncDisposableRegistry, IConfigurationService, IDisposableRegistry } from '../../client/common/types';
 import { createDeferred, Deferred } from '../../client/common/utils/async';
 import { NativeEditor } from '../../client/datascience/interactive-ipynb/nativeEditor';
-import { NativeEditorProviderOld } from '../../client/datascience/interactive-ipynb/nativeEditorProviderOld';
 import { NativeEditorProvider } from '../../client/datascience/notebookStorage/nativeEditorProvider';
 import { NativeEditorNotebookModel } from '../../client/datascience/notebookStorage/notebookModel';
 import { INotebookStorageProvider } from '../../client/datascience/notebookStorage/notebookStorageProvider';
-import {
-    IDataScienceErrorHandler,
-    INotebookEditor,
-    INotebookEditorProvider,
-    INotebookProvider
-} from '../../client/datascience/types';
+import { INotebookEditor, INotebookEditorProvider, INotebookProvider } from '../../client/datascience/types';
 import { ClassType, IServiceContainer } from '../../client/ioc/types';
 import { DataScienceIocContainer } from './dataScienceIocContainer';
 import { IMountedWebView, WaitForMessageOptions } from './mountedWebView';
@@ -135,39 +124,6 @@ export class TestNativeEditorProvider extends TestNativeEditorProviderMixin(Nati
             storage,
             notebookProvider,
             fs
-        );
-    }
-}
-
-@injectable()
-export class TestNativeEditorProviderOld extends TestNativeEditorProviderMixin(NativeEditorProviderOld) {
-    constructor(
-        @inject(IServiceContainer) serviceContainer: IServiceContainer,
-        @inject(IAsyncDisposableRegistry) asyncRegistry: IAsyncDisposableRegistry,
-        @inject(IDisposableRegistry) disposables: IDisposableRegistry,
-        @inject(IWorkspaceService) workspace: IWorkspaceService,
-        @inject(IConfigurationService) configuration: IConfigurationService,
-        @inject(ICustomEditorService) customEditorService: ICustomEditorService,
-        @inject(IFileSystem) fs: IFileSystem,
-        @inject(IDocumentManager) documentManager: IDocumentManager,
-        @inject(ICommandManager) cmdManager: ICommandManager,
-        @inject(IDataScienceErrorHandler) dataScienceErrorHandler: IDataScienceErrorHandler,
-        @inject(INotebookStorageProvider) storage: INotebookStorageProvider,
-        @inject(INotebookProvider) notebookProvider: INotebookProvider
-    ) {
-        super(
-            serviceContainer,
-            asyncRegistry,
-            disposables,
-            workspace,
-            configuration,
-            customEditorService,
-            fs,
-            documentManager,
-            cmdManager,
-            dataScienceErrorHandler,
-            storage,
-            notebookProvider
         );
     }
 }

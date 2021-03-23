@@ -298,11 +298,7 @@ import { IMountedWebView } from './mountedWebView';
 import { IMountedWebViewFactory, MountedWebViewFactory } from './mountedWebViewFactory';
 import { TestExecutionLogger } from './testexecutionLogger';
 import { TestInteractiveWindowProvider } from './testInteractiveWindowProvider';
-import {
-    ITestNativeEditorProvider,
-    TestNativeEditorProvider,
-    TestNativeEditorProviderOld
-} from './testNativeEditorProvider';
+import { ITestNativeEditorProvider, TestNativeEditorProvider } from './testNativeEditorProvider';
 import { TestPersistentStateFactory } from './testPersistentStateFactory';
 import { WebBrowserPanelProvider } from './uiTests/webBrowserPanelProvider';
 import { JupyterServerUriStorage } from '../../client/datascience/jupyter/serverUriStorage';
@@ -623,10 +619,7 @@ export class DataScienceIocContainer extends UnitTestIocContainer {
             ICellHashListener
         ]);
         this.serviceManager.addSingleton<IDebugLocationTracker>(IDebugLocationTracker, DebugLocationTrackerFactory);
-        this.serviceManager.addSingleton<INotebookEditorProvider>(
-            INotebookEditorProvider,
-            useCustomEditor ? TestNativeEditorProvider : TestNativeEditorProviderOld
-        );
+        this.serviceManager.addSingleton<INotebookEditorProvider>(INotebookEditorProvider, TestNativeEditorProvider);
         this.serviceManager.addSingleton<DataViewerDependencyService>(
             DataViewerDependencyService,
             DataViewerDependencyService
